@@ -1,15 +1,13 @@
 import { useState } from "react";
 
-function ListGroup() {
-  const items = ["First item", "Second item", "Third item", "Fourth item"];
+interface Props {
+  items: string[];
+  onSelectItem: (item: string) => void; // passing a function as a prop
+}
 
+function ListGroup({ items, onSelectItem }: Props) {
   //hook
   const [selectedItem, setSelectedItem] = useState(-1);
-
-  //event handler
-  const handleClick = (index: number) => {
-    setSelectedItem(index);
-  };
 
   return (
     <>
@@ -23,7 +21,10 @@ function ListGroup() {
                 : "list-group-item"
             }
             key={item}
-            onClick={() => handleClick(index)}
+            onClick={() => {
+              setSelectedItem(index);
+              onSelectItem(item);
+            }}
           >
             {item}
           </li>

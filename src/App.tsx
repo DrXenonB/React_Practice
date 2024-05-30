@@ -1,16 +1,11 @@
-import ListGroup from "./Components/listGroup";
-import Message from "./Components/message";
+import Alert from "./Components/alert";
 
 function App() {
-  let list1Items = ["First item", "Second item", "Third item", "Fourth item"];
-
   return (
     <>
-      <Message heading="Hello World!.." />
-      <ListGroup
-        items={list1Items}
-        onSelectItem={(item: string) => console.log(item)}
-      />
+      <Alert>
+        Hello <span>World!</span>
+      </Alert>
     </>
   );
 }

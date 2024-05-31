@@ -1,12 +1,12 @@
 interface Props {
-  heading: string;
+  children: string;
 }
 
-function Message(props: Props) {
+function Message({ children }: Props) {
   // JSX: JavaScript XML
   return (
     <>
-      <h1>{props.heading}</h1>
+      <h1>{children}</h1>
     </>
   );
 }

@@ -1,16 +1,9 @@
-import Message from "./Components/message";
-import ListGroup from "./Components/listGroup";
+import { BsBoomboxFill } from "react-icons/bs";
 
 function App() {
-  let listArray = ["First Item", "Second Item", "Third Item"];
-
   return (
     <>
-      <Message>Hello!</Message>
-      <ListGroup
-        items={listArray}
-        onSelectItem={() => console.log("Clicked!")}
-      />
+      <BsBoomboxFill color="red" />
     </>
   );
 }

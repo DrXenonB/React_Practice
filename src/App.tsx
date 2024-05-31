@@ -1,9 +1,9 @@
-import { BsBoomboxFill } from "react-icons/bs";
+import StyledButton from "./Components/StyledButton";
 
 function App() {
   return (
     <>
-      <BsBoomboxFill color="red" />
+      <StyledButton>Button</StyledButton>
     </>
   );
 }

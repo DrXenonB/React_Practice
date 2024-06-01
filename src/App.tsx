@@ -1,9 +1,9 @@
-import StyledButton from "./Components/StyledButton";
+import LikeButton from "./Components/LikeButton";
 
 function App() {
   return (
     <>
-      <StyledButton>Button</StyledButton>
+      <LikeButton />
     </>
   );
 }

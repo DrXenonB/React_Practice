@@ -3,7 +3,7 @@ import LikeButton from "./Components/LikeButton";
 function App() {
   return (
     <>
-      <LikeButton />
+      <LikeButton onClick={() => console.log("Clicked!")} />
     </>
   );
 }

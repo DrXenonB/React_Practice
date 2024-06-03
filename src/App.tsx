@@ -1,10 +1,11 @@
-import LikeButton from "./Components/LikeButton";
+import UpdateDrink from "./Components/UpdateDrink";
+import "./App.css";
 
 function App() {
   return (
-    <>
-      <LikeButton onClick={() => console.log("Clicked!")} />
-    </>
+    <div className="App">
+      <UpdateDrink />
+    </div>
   );
 }
 

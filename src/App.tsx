@@ -1,26 +1,26 @@
 import { useState } from "react";
 import "./App.css";
+import Button from "./Components/button";
+import ListGroup from "./Components/listGroup";
 
 function App() {
-  /* For Best Practices avoid deeply nested objects */
-  const [customer, setCustomer] = useState({
-    name: "John",
-    adress: {
-      city: "Lunuwila",
-      zipCode: 61118,
-    },
-  });
+  const [tags, setTags] = useState(["Happy", "Cheerful", "Lazy"]);
 
   const handleClick = () => {
-    setCustomer({
-      ...customer,
-      adress: { ...customer.adress, zipCode: 61115 },
-    });
+    //Add
+    // setTags([...tags, "Exiting"]);
+
+    //Remove
+    setTags(tags.filter((tag) => tag !== "Cheerful"));
+
+    //Update
+    // setTags(tags.map((tag) => (tag === "Happy" ? "Happiness" : tag)));
   };
 
   return (
-    <div className="App">
-      <button onClick={handleClick}>Click Me</button>
+    <div>
+      <Button onClick={handleClick}>Click Me</Button>
+      <ListGroup items={tags} onSelectItem={() => console.log("Clicked")} />
     </div>
   );
 }

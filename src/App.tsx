@@ -1,26 +1,26 @@
 import { useState } from "react";
+import StyledButton from "./Components/StyledButton";
 import "./App.css";
-import Button from "./Components/button";
-import ListGroup from "./Components/listGroup";
 
 function App() {
-  const [tags, setTags] = useState(["Happy", "Cheerful", "Lazy"]);
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
 
   const handleClick = () => {
-    //Add
-    // setTags([...tags, "Exiting"]);
-
-    //Remove
-    setTags(tags.filter((tag) => tag !== "Cheerful"));
-
-    //Update
-    // setTags(tags.map((tag) => (tag === "Happy" ? "Happiness" : tag)));
+    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
   };
 
   return (
-    <div>
-      <Button onClick={handleClick}>Click Me</Button>
-      <ListGroup items={tags} onSelectItem={() => console.log("Clicked")} />
+    <div className="app">
+      <StyledButton onClick={handleClick}>Click</StyledButton>
+      <div>
+        {bugs[0].title} fixed: {String(bugs[0].fixed)}
+      </div>
+      <div>
+        {bugs[1].title} fixed: {String(bugs[1].fixed)}
+      </div>
     </div>
   );
 }

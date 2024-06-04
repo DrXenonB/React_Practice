@@ -1,18 +1,13 @@
 .btn {
   border: none;
-  font-size: 25px;
   font-family: sans-serif;
   border-radius: 7px;
-  background-color: rgb(97, 129, 218);
+  background-color: rgb(66, 110, 231);
 
   padding: 5px 13px;
 
   &:hover {
     cursor: pointer;
-    background-color: rgb(107, 135, 212);
-  }
-
-  &:active {
-    background-color: rgb(76, 113, 212);
+    background-color: rgb(82, 121, 226);
   }
 }

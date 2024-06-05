@@ -1,34 +1,19 @@
 import { useState } from "react";
-import StyledButton from "./Components/StyledButton";
-import { produce } from "immer";
 import "./App.css";
+import Navbar from "./Components/navbar";
+import Cart from "./Components/cart";
 
 function App() {
-  const [bugs, setBugs] = useState([
-    { id: 1, title: "Bug 1", fixed: false },
-    { id: 2, title: "Bug 2", fixed: false },
-  ]);
+  const [cartItems, setCartItems] = useState(["Product 1", "Product 2"]);
 
   const handleClick = () => {
-    // setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
-
-    setBugs(
-      produce((draft) => {
-        const bug = draft.find((bug) => bug.id === 1);
-        if (bug) bug.fixed = true;
-      })
-    );
+    setCartItems([]);
   };
 
   return (
     <div className="app">
-      <StyledButton onClick={handleClick}>Click</StyledButton>
-
-      {bugs.map((bug) => (
-        <div>
-          Bug {bug.id} {bug.fixed ? "fixed" : "new"}
-        </div>
-      ))}
+      <Navbar cartItemsCount={cartItems.length} />
+      <Cart cartItems={cartItems} onClear={handleClick} />
     </div>
   );
 }

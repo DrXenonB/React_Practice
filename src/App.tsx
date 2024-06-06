@@ -1,36 +1,18 @@
-import { useState } from "react";
 import "./App.css";
+import ExpandableText from "./Components/ExpandableText";
 
 function App() {
-  const [cart, setcart] = useState({
-    discount: 0.1,
-    items: [
-      { id: 1, title: "Product 1", quantity: 1 },
-      { id: 2, title: "Product 2", quantity: 1 },
-    ],
-  });
-
-  const handleClick = () => {
-    //Sets the first items quantity to 2
-    setcart({
-      ...cart,
-      items: cart.items.map((item) =>
-        item.id === 1 ? { ...item, quantity: 2 } : item
-      ),
-    });
-  };
-
   return (
     <div className="app">
-      <h3>Cart</h3>
-      <ul>
-        {cart.items.map((item) => (
-          <li>
-            {item.title} /quantity: {item.quantity}
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleClick}>Click</button>
+      <ExpandableText maxChars={50}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porta
+        lacinia metus, non condimentum libero porttitor eget. Praesent feugiat
+        faucibus nisi, eu vestibulum mauris mollis sit amet. Vestibulum eget
+        malesuada est, sit amet imperdiet dolor. Praesent enim lacus, vestibulum
+        in ligula vel, semper aliquam quam. Sed consectetur ut mauris et dictum.
+        Maecenas mollis dignissim neque, ut sagittis erat faucibus tincidunt.
+        Vivamus vel nisl vitae quam dapibus egestas.
+      </ExpandableText>
     </div>
   );
 }

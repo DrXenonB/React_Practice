@@ -11,11 +11,12 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+/****  Main Function ****/
 const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }, // Nested deStructure
+    formState: { errors, isValid }, // Nested deStructure
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   console.log(errors);
@@ -53,7 +54,7 @@ const Form = () => {
           {errors.age && <p className="text-danger">{errors.age.message}</p>}
         </div>
 
-        <button type="submit" className="btn btn-secondary">
+        <button disabled={!isValid} type="submit" className="btn btn-secondary">
           Submit
         </button>
       </form>

@@ -1,20 +1,32 @@
-import { useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const connect = () => {
-  console.log("Connecting!");
-};
-const disconnect = () => {
-  console.log("Disconnecting!");
-};
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+
   useEffect(() => {
-    connect();
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => {
+        setUsers(res.data);
+      });
+  }, [setUsers]);
 
-    return () => disconnect();
-  });
-
-  return <div className="app"></div>;
+  return (
+    <div className="app">
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default App;

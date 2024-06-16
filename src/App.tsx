@@ -1,7 +1,5 @@
 import axios, { AxiosError, CanceledError } from "axios";
-import { CANCELLED } from "dns/promises";
 import { useEffect, useState } from "react";
-import { Controller } from "react-hook-form";
 
 interface User {
   id: number;
@@ -38,10 +36,26 @@ function App() {
 
   const deleteUser = (user: User) => {
     const originalUsers = [...users];
-    setUsers(users.filter((u) => u.id != user.id));
+    setUsers(users.filter((u) => u.id !== user.id));
 
     axios
       .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUsers);
+      });
+  };
+
+  const addUser = () => {
+    const originalUsers = [...users];
+    const newUser = { id: 0, name: "Josh", email: "josh@example.com" };
+    setUsers([newUser, ...users]);
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newUser)
+      .then(({ data }) => {
+        setUsers([data, ...users]);
+      })
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
@@ -52,6 +66,11 @@ function App() {
     <div className="app">
       {error && <p className="text-danger">{error}</p>}
       {isLoading && <div className="spinner-border" />}
+      <div className="mb-3">
+        <button className="btn btn-primary" onClick={addUser}>
+          Add
+        </button>
+      </div>
       <ul className="list-group">
         {users.map((user) => (
           <li

@@ -194,8 +194,9 @@ const [customer, setCustomer] = useState({
 });
 
 setCustomer({
-...customer,
-address: { ...customer.address, zipCode: 94112}, });
+    ...customer,
+    address: { ...customer.address, zipCode: 94112},
+});
 ```
 
 **UPDATING ARRAYS**
@@ -223,6 +224,17 @@ const [bugs, setBugs] = useState([
 
 setBugs(bugs.map(bug =>
         bug.id === 1 ? { ...bug, fixed: true } : bug));
+```
+
+**UPDATING WITH IMMER**
+
+```
+import produce from 'immer';
+
+setBugs (produce (draft => {
+    const bug draft.find(bug => bug.id === 1);
+    if (bug) bug. fixed = true;
+}));
 ```
 
 ## Resources

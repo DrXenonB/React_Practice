@@ -5,22 +5,25 @@ Welcome to my React learning workbook! This repository contains all my practice 
 ## Table of Contents
 
 1. [Getting Started](#Getting-Started)
-   - [Terms](#intro-terms)
-   - [Summary](#intro-summary)
+   - [Terms]
+   - [Summary]
 2. [Building Components](#Building-Components)
-   - [Terms](#Components-terms)
-   - [Summary](#Components-summary)
-3. [Resources](#resources)
+   - [Terms]
+   - [Summary]
+3. [Styling Components](#Styling-Components)
+   - [Terms]
+   - [Summary]
+4. [Resources](#resources)
 
 ## Getting Started
 
-### Terms {#intro-terms}
+### Terms
 
 **Components** **JSX**
 **JavaScript Framework** **DOM**
 **JavaScript Library** **Virtual DOM**
 
-### Summary {#intro-summary}
+### Summary
 
 - React is a JavaScript library for building dynamic and interactive user interfaces.
 - In React applications, we don’t query and update the DOM. Instead, we describe our application using small, reusable components. React will take care of efficiently creating and updating DOM elements.
@@ -33,7 +36,7 @@ Welcome to my React learning workbook! This repository contains all my practice 
 
 ## Building Components
 
-### Terms {#Components-terms}
+### Terms
 
 **Fragment**
 **Immutable**
@@ -41,7 +44,7 @@ Welcome to my React learning workbook! This repository contains all my practice 
 **State**
 **hook**
 
-### Summary {#Components-summary}
+### Summary
 
 - In React apps, a component can only return a single element. To return multiple elements, we wrap them in a fragment, which is represented by empty angle brackets.
 - To render a list in JSX, we use the ‘array.map()’ method. When mapping items, each item must have a unique key, which can be a string or a number.
@@ -58,6 +61,53 @@ Welcome to my React learning workbook! This repository contains all my practice 
 - We can pass data and functions to a component using props. Functions are used to notify the parent (consumer) of a component about certain events that occur in the component, such as an item being clicked or selected.
 - We should treat props as immutable (read-only) and not modify them.
 - When the state or props of a component change, React will re-render the component and update the DOM accordingly.
+
+**CREATING A COMPONENT**
+
+```
+const Message = () => {
+    return <h1>Hello World!</h1>
+}
+
+export default Message;
+```
+
+**Props**
+
+```
+interface Props {
+    name: string;
+}
+
+const Message = ({ name }: Props) => {
+    return <h1>Hello World!</h1>
+}
+```
+
+## Styling Components
+
+### Terms
+
+- CSS-in-JSCSS
+- modules
+- Implementation details
+- Interface
+- Inline styles
+- Modular
+- Separation of concerns
+- Vanilla CSS
+
+### Summary
+
+- We have several options for styling React components, including vanilla CSS, CSS modules, CSS-in-JS, and inline styles.
+- With vanilla CSS, we write our component styles in a separate CSS file and import it into the component file. However, we may encounter conflicts if the same CSS classes are defined in multiple files.
+- CSS modules resolve this issue by generating unique class names during the build process.
+- With CSS-in-JS, we define all the styles for a component alongside its code. Like CSS modules, this provides scoping for CSS classes and eliminates conflicts. It also makes it easier for us to change or delete a component without affecting other components.
+- The separation of concerns principle suggests that we divide a program into distinct sections or modules where each section handles a specific functionality. It helps us build modular and maintainable applications.
+- With this principle, the complexity and implementation details of a module are hidden behind a well-defined interface.
+- Separation of concerns is not just about organizing code into files, but rather dividing areas of functionality. Therefore, CSS-in-JS does not violate the separation of concerns principle as all the complexity for a component remains hidden behind its interface.
+- Although inline styles are easy to apply, they can make our code difficult to maintain over time and should only be used as a last resort.
+- We can add icons to our applications using the react-icons library.•There are several UI libraries available that can assist us in quickly building beautiful and modern applications. Some popular options include Bootstrap, Material UI, TailwindCSS, DaisyUI, ChakraUI, and more
 
 ## Resources
 

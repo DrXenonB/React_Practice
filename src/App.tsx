@@ -1,11 +1,6 @@
-import apiClient, { CanceledError } from "./Services/api-client";
+import { CanceledError } from "./Services/api-client";
 import { useEffect, useState } from "react";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+import userService, { User } from "./Services/user-service";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -13,14 +8,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-    // built in class of modern browsers, that allows us to cancel asyncronous operatios.
-
     setIsLoading(true);
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
+    const { request, cancel } = userService.getAllUsers();
+    request
       .then((res) => {
         setUsers(res.data);
         setIsLoading(false);
@@ -31,14 +21,14 @@ function App() {
         setIsLoading(false);
       });
 
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   const deleteUser = (user: User) => {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
 
-    apiClient.delete("/users/" + user.id).catch((err) => {
+    userService.deleteUser(user.id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
@@ -49,8 +39,8 @@ function App() {
     const newUser = { id: 0, name: "Josh", email: "josh@example.com" };
     setUsers([newUser, ...users]);
 
-    apiClient
-      .post("/users", newUser)
+    userService
+      .addUser(newUser)
       .then(({ data }) => {
         setUsers([data, ...users]);
       })
@@ -65,7 +55,7 @@ function App() {
     const updatedUser = { ...user, name: user.name + "!" };
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
-    apiClient.patch("/users/" + user.id, updateUser).catch((err) => {
+    userService.updateUser(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });

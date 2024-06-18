@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# My React Learning Journey
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to my React learning workbook! This repository contains all my practice exercises, notes, and progress as I learn React.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+1. [Getting Started](#Getting-Started)
+   - [Terms](#intro-terms)
+   - [Summary](#intro-summary)
+2. [Building Components](#Building-Components)
+   - [Terms](#Components-terms)
+   - [Summary](#Components-summary)
+3. [Resources](#resources)
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Terms {#intro-terms}
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Components** **JSX**
+**JavaScript Framework** **DOM**
+**JavaScript Library** **Virtual DOM**
 
-### `npm test`
+### Summary {#intro-summary}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React is a JavaScript library for building dynamic and interactive user interfaces.
+- In React applications, we don’t query and update the DOM. Instead, we describe our application using small, reusable components. React will take care of efficiently creating and updating DOM elements.
+- React components can be created using a function or a class. Function-based components are the preferred approach as they’re more concise and easier to work with.
+- JSX stands for JavaScript XML. It is a syntax that allows us to write components that combine HTML and JavaScript in a readable and expressive way, making it easier to create complex user interfaces.
+- When our application starts, React takes a tree of components and builds a JavaScript data structure called the virtual DOM. This virtual DOM is different from the actual DOM in the browser. It’s a lightweight, in-memory representation of our component tree.
+- When the state or the data of a component changes, React updates the corresponding node in the virtual DOM to reflect the new state. Then, it compares the current version of virtual DOM with the previous version to identify the nodes that should be updated. It’ll then update those nodes in the actual DOM.
+- In browser-based apps, updating the DOM is done by a companion library called ReactDOM. In mobile apps, React Native uses native components to render the user interface.
+- Since React is just a library and not a framework like Angular or Vue, we often need other tools for concerns such as routing, state management, internationalization, form validation, etc.
 
-### `npm run build`
+## Building Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Terms {#Components-terms}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Fragment**
+**Immutable**
+**Props**
+**State**
+**hook**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Summary {#Components-summary}
 
-### `npm run eject`
+- In React apps, a component can only return a single element. To return multiple elements, we wrap them in a fragment, which is represented by empty angle brackets.
+- To render a list in JSX, we use the ‘array.map()’ method. When mapping items, each item must have a unique key, which can be a string or a number.
+- To conditionally render content, we can use an ‘if’ statement or a ternary operator.
+- We use the state hook to define state (data that can change over time) in a component. A hook is a function that allows us to tap into built-in features in React.
+- Components can optionally have props (short for properties) to accept input.
+- We can pass data and functions to a component using props. Functions are used to notify the parent (consumer) of a component about certain events that occur in the component, such as an item being clicked or selected.•We should treat props as immutable (read-only) and not modify them.
+- When the state or props of a component change, React will re-render the component and update the DOM accordingly.
+- In React apps, a component can only return a single element. To return multiple elements, we wrap them in a fragment, which is represented by empty angle brackets.
+- To render a list in JSX, we use the ‘array.map()’ method. When mapping items, each item must have a unique key, which can be a string or a number.
+- To conditionally render content, we can use an ‘if’ statement or a ternary operator.
+- We use the state hook to define state (data that can change over time) in a component. A hook is a function that allows us to tap into built-in features in React.
+- Components can optionally have props (short for properties) to accept input.
+- We can pass data and functions to a component using props. Functions are used to notify the parent (consumer) of a component about certain events that occur in the component, such as an item being clicked or selected.
+- We should treat props as immutable (read-only) and not modify them.
+- When the state or props of a component change, React will re-render the component and update the DOM accordingly.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Resources
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Official React Documentation](https://reactjs.org/docs/getting-started.html)
+- [React Tutorial for Beginners](https://www.tutorialspoint.com/reactjs/index.htm)

@@ -16,15 +16,24 @@ Welcome to my React learning workbook! This repository contains all my practice 
 4. [Managing Component State](#Managing-Component-State)
    - [Terms](#Managing-Component-State)
    - [Summary](#Managing-Component-State)
-5. [Resources](#resources)
+5. [Building Forms](#Building-Forms)
+   - [Terms](#Building-Forms)
+   - [Summary](#Building-Forms)
+6. [Connecting to the Backend](#Connecting-to-the-Backend)
+   - [Terms](#Connecting-to-the-Backend)
+   - [Summary](#Connecting-to-the-Backend)
+7. [Resources](#resources)
 
 ## Getting Started
 
 ### Terms
 
-**Components** **JSX**
-**JavaScript Framework** **DOM**
-**JavaScript Library** **Virtual DOM**
+- Components
+- JSX
+- JavaScript Framework
+- JavaScript Library
+- DOM
+- Virtual DOM
 
 ### Summary
 
@@ -41,11 +50,11 @@ Welcome to my React learning workbook! This repository contains all my practice 
 
 ### Terms
 
-**Fragment**
-**Immutable**
-**Props**
-**State**
-**hook**
+- Fragment
+- Immutable
+- Props
+- State
+- hook
 
 ### Summary
 
@@ -235,6 +244,249 @@ setBugs (produce (draft => {
     const bug draft.find(bug => bug.id === 1);
     if (bug) bug. fixed = true;
 }));
+```
+
+## Building Forms
+
+### Terms
+
+- React Hook Form
+- Ref hook
+- Schema-based validation libraries
+- Zod
+
+### Summary
+
+- To handle form submissions, we set the onSubmit attribute of the form element.
+- We can use the ref hook to access elements in the DOM. This technique is often used to read the value of input fields upon submitting a form.
+- We can also use the state hook to create state variables and update them as the user types into input fields. With this technique, every time the user types a character into an input field, the component containing the form gets re-rendered. While in theory this can cause a performance penalty, in practice this is often negligible.
+- React Hook Form is a popular library that helps us build forms quickly with less code. With React Hook Form, we no longer have to worry about using the ref or state hooks to manage the form state.
+- React Hook Form supports the standard HTML attributes for data validation such as required, minLength, etc.
+- We can validate our forms using schema-based validation libraries such as joi, yup, zod, etc. With these libraries, we can define all our validation rules in a single place called a schema.
+
+**HANDLING FORM SUBMISSION**
+
+```
+const App = () => {
+    const handleSubmit = (event: FormEvent) => { event.preventDefault();
+        console.log('Submitted');
+    };
+
+    return (
+    <form onSubmit={handleSubmit}>
+    </form>
+    );
+};
+```
+
+**ACCESSING INPUT FIELDS USING THE REF HOOK**
+
+```
+const App = () => {
+    const nameRef = useRef<HTMLInputElement>(null);
+
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+
+        if (nameRef.current)
+            console.log(nameRef.current.value);
+    };
+
+    return (
+    <form onSubmit={handleSubmit}>
+        <input ref={nameRef} type="text" />
+    </form>
+    );
+};
+```
+
+**MANAGING FORM STATE USING THE STATE HOOK**
+
+```
+const App = () => {
+    const [name, setName] = useState('');
+
+    return (
+        <form>
+            <input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+            />
+        </form>
+    );
+};
+```
+
+**MANAGING FORM STATE USING REACT HOOK FORM**
+
+```
+import { FieldValues, useForm } from 'react-hook-form';
+
+const App = () => {
+    const { register, handleSubmit } = useForm();
+
+    const onSubmit = (data: FieldValues) => {
+        console.log('Submitting the form', data);
+    };
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('name')} type="text" />
+        </form>
+    );
+};
+```
+
+**VALIDATION USING HTML5 ATTRIBUTESDISABLING THE SUBMIT BUTTON**
+
+```
+const App = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>();
+
+    const onSubmit = (data: FieldValues) => {
+        console.log('Submitting the form', data);
+    };
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('name', { required: true })} type="text" />
+            {errors.name?.type === 'required' && <p>Name is required.</p>}
+        </form>
+    );
+};
+```
+
+**DISABLING THE SUBMIT BUTTON**
+
+```
+const App = () => {
+    const { formState: { isValid }, } = useForm<FormData>();
+
+    return (
+        <form>
+            <button disabled={!isValid}>Submit</button>
+        </form>
+    );
+};
+```
+
+**SCHEMA-BASED VALIDATION WITH ZOD**
+
+```
+import { FieldValues, useForm } from 'react-hook-form'; import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const schema z.object({
+    name: z.string().min(3),
+});
+
+type FormData = z.infer<typeof schema>;
+
+const App = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+    const onSubmit = (data: FieldValues) => {
+        console.log('Submitting the form', data);
+    };
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('name')} type="text" />
+            {errors.name && <p>{errors.name.message}</p>}
+        </form>
+    );
+};
+```
+
+## Connecting to the Backend
+
+### Terms
+
+- Axios
+- Back-end
+- Effect hook
+- Front-end
+- HTTP
+- HTTP request
+- HTTP response
+- Side effects
+
+### Summary
+
+- We use the effect hook to perform side effects, such as fetching data or updating the DOM.
+- The effect hook takes a function that performs the side effect and an optional array of dependencies. Whenever the dependencies change, the effect hook runs again.
+- To clean up any resources that were created by the effect hook, we can include a clean-up function that runs when the component unmounts or the dependencies change.
+- React is a library for building front-end user interfaces, but to create complete apps, we also need a back-end server to handle business logic, data storage, and other functionality.
+- The communication between the front-end and the back-end happens over HTTP, the same protocol that powers the web. The front-end sends an HTTP request to the back-end, and the back-end sends an HTTP response back.
+- Each HTTP request and response contains a header and a body. The header provides metadata about the message, such as the content type and HTTP status code, while the body contains the actual data being sent or received.
+- To send HTTP requests to the backend, we can use axios, a popular JavaScript library. axios makes it easy to send requests.
+- When we send HTTP requests with the effect hook, we should provide a clean-up function to cancel the request if the component is unmounted before the response is received. This is important to prevent errors, especially if the user navigates to a different page while the request is still pending.
+- When sending HTTP requests, we must handle errors properly. This can be done using try-catch blocks or by handling the error in the promise chain using .catch().
+- Custom hooks are a way to reuse code logic between multiple components. By encapsulating logic in a custom hook, we can create reusable pieces of code that can be shared across components without duplicating the code. Custom hooks can be used to handle common tasks, such as fetching data, and can help to make our code more organized and easier to maintain.
+
+**USING THE EFFECT HOOK**
+
+```
+function App() {
+    useEffect(() => {
+        document.title = 'App';
+    }, []);
+}
+```
+
+**FETCHING DATA WITH AXIOS**
+
+```
+const [users, setUsers] = useState<User[]>([]);
+
+useEffect(() => {
+    axios.get<User[]>('http://...')
+    .then((res) => setUsers(res.data));
+}, []);
+```
+
+**CANCELLING AN HTTP REQUEST**
+
+```
+useEffect(() => {
+    const controller = new AbortController();
+
+    axios.get<User[]>('http://...', { signal: controller.signal })
+        .then ((res) => setUsers(res.data))
+        .catch(err => {
+            if (err instanceof CanceledError) return;
+            setError(err.message);
+    });
+
+    return () => controller.abort();
+}, []);
+```
+
+**DELETING DATA**
+
+```
+axios.delete("http://...")
+```
+
+**CREATING DATA**
+
+```
+axios.post("http://...", newUser)
+```
+
+**UPDATING DATA**
+
+```
+axios.put("http://...", updatedUser)
 ```
 
 ## Resources
